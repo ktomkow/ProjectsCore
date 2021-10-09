@@ -6,7 +6,7 @@
     /// <typeparam name="T">Id type</typeparam>
     public interface IEntity<T> where T : struct
     {
-        public T Id { get; protected set; }
+        public T Id { get; }
 
         public string IdAsString => this.Id.ToString();
     }
