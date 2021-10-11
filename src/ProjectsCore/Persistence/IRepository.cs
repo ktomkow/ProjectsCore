@@ -1,4 +1,5 @@
 ﻿using ProjectsCore.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ProjectsCore.Persistence
@@ -9,7 +10,7 @@ namespace ProjectsCore.Persistence
     {
         Task<TEntity> Get(TKey key);
 
-        Task<TEntity> GetAll();
+        Task<IQueryable<TEntity>> GetAll();
 
         Task<TEntity> Insert(TEntity entity);
 
