@@ -8,6 +8,6 @@
     {
         protected T id;
 
-        public T Id => this.Id;
+        public T Id => this.id;
     }
 }
