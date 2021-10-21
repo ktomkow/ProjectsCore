@@ -6,7 +6,7 @@ namespace ProjectsCore.Persistence
 {
     public interface IRepository<TKey, TEntity> 
         where TKey : struct
-        where TEntity : IEntity<TKey>
+        where TEntity : Entity<TKey>
     {
         Task<TEntity> Get(TKey key);
 

@@ -27,7 +27,7 @@ namespace ProjectsCore.UnitTests
 
             public SimpleClass(Guid id)
             {
-                this.id = id;
+                this.Id = id;
             }
         }
     }

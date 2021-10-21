@@ -4,10 +4,10 @@
     /// General usage entity class based on IEntity interface
     /// </summary>
     /// <typeparam name="T">Id type</typeparam>
-    public abstract class Entity<T> : IEntity<T> where T : struct
+    public abstract class Entity<T> where T : struct
     {
-        protected T id;
+        public string IdAsString => this.Id.ToString();
 
-        public T Id => this.id;
+        public T Id { get; protected set; }
     }
 }
