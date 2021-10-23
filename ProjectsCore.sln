@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsCore.UnitTests", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsCore.Mongo.UnitTests", "tests\unit\ProjectsCore.Mongo.UnitTests\ProjectsCore.Mongo.UnitTests.csproj", "{C49F4A81-D261-4D69-9373-6321EAB0382D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{6EAD59C6-A6E2-48B2-AF25-DB3F4CBD76EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsCore.Mongo.IntegrationTests", "tests\integration\ProjectsCore.Mongo.IntegrationTests\ProjectsCore.Mongo.IntegrationTests.csproj", "{20B478BB-0471-46E8-BB55-2557AD7682C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +107,18 @@ Global
 		{C49F4A81-D261-4D69-9373-6321EAB0382D}.Release|x64.Build.0 = Release|Any CPU
 		{C49F4A81-D261-4D69-9373-6321EAB0382D}.Release|x86.ActiveCfg = Release|Any CPU
 		{C49F4A81-D261-4D69-9373-6321EAB0382D}.Release|x86.Build.0 = Release|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Debug|x64.Build.0 = Debug|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x64.Build.0 = Release|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +131,8 @@ Global
 		{E63F87A3-4116-47B3-936E-881DA33CC48C} = {6CE393BE-6499-454F-B200-35FE6593BC70}
 		{114D6FAE-DB2A-4789-ABC7-0A516AF847E7} = {E63F87A3-4116-47B3-936E-881DA33CC48C}
 		{C49F4A81-D261-4D69-9373-6321EAB0382D} = {E63F87A3-4116-47B3-936E-881DA33CC48C}
+		{6EAD59C6-A6E2-48B2-AF25-DB3F4CBD76EA} = {6CE393BE-6499-454F-B200-35FE6593BC70}
+		{20B478BB-0471-46E8-BB55-2557AD7682C3} = {6EAD59C6-A6E2-48B2-AF25-DB3F4CBD76EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4FB8B06-999E-41B9-A740-C58E5B38CCA9}
