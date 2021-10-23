@@ -1,51 +1,58 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectsCore.Models;
+using ProjectsCore.Mongo.IntegrationTests.RepositoryTests.Models;
 using ProjectsCore.Mongo.Interfaces;
 using ProjectsCore.Persistence;
 using System;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests
+namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
 {
     public class ReplaceTests : TestsFixture
     {
         private readonly string collectionName;
 
-        private readonly IRepository<int, SomePersonRepresentaion> repository;
+        private readonly IRepository<int, IntKeyedPerson> repository;
 
         public ReplaceTests(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             ICollectionNameResolver nameResolver = this.serviceProvider.GetService<ICollectionNameResolver>();
 
-            this.repository = this.serviceProvider.GetService<IRepository<int, SomePersonRepresentaion>>();
+            repository = this.serviceProvider.GetService<IRepository<int, IntKeyedPerson>>();
 
-            this.collectionName = nameResolver.Resolve(typeof(SomePersonRepresentaion));
+            collectionName = nameResolver.Resolve(typeof(IntKeyedPerson));
         }
 
         [Fact]
         public async Task UpdateOne()
         {
-            var person = SomePersonRepresentaion.CreateOne();
+            var person = IntKeyedPerson.CreateOne();
 
-            await this.repository.Insert(person);
+            await repository.Insert(person);
 
-            var personFromDb = await this.repository.Get(1);
+            var personFromDb = await repository.Get(1);
 
             personFromDb.FirstName = "John";
             personFromDb.LastName = "Doe";
 
-            await this.repository.Update(personFromDb);
+            await repository.Update(personFromDb);
 
-            var updatedPerson = await this.repository.Get(1);
+            var updatedPerson = await repository.Get(1);
 
             updatedPerson.FirstName.Should().Be("John");
             updatedPerson.LastName.Should().Be("Doe");
         }
 
+        public class GuidKeyed : Entity<Guid>
+        {
+            public string Name { get; set; }
+        }
+
         protected override async Task Cleanup()
         {
-            await this.collectionPurger.Purge(this.collectionName);
+            await collectionPurger.Purge(collectionName);
         }
     }
 }

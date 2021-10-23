@@ -6,32 +6,33 @@ using System.Threading.Tasks;
 using Xunit;
 using FluentAssertions;
 using System.Linq;
+using ProjectsCore.Mongo.IntegrationTests.RepositoryTests.Models;
 
-namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests
+namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
 {
     public class SimpleTests : TestsFixture
     {
         private readonly string collectionName;
 
-        private readonly IRepository<int, SomePersonRepresentaion> repository;
+        private readonly IRepository<int, IntKeyedPerson> repository;
 
         public SimpleTests(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             ICollectionNameResolver nameResolver = this.serviceProvider.GetService<ICollectionNameResolver>();
 
-            this.repository = this.serviceProvider.GetService<IRepository<int, SomePersonRepresentaion>>();
+            repository = this.serviceProvider.GetService<IRepository<int, IntKeyedPerson>>();
 
-            this.collectionName = nameResolver.Resolve(typeof(SomePersonRepresentaion));
+            collectionName = nameResolver.Resolve(typeof(IntKeyedPerson));
         }
 
         [Fact]
         public async Task CreateOne()
         {
-            SomePersonRepresentaion person = SomePersonRepresentaion.CreateOne();
+            IntKeyedPerson person = IntKeyedPerson.CreateOne();
 
-            await this.repository.Insert(person);
+            await repository.Insert(person);
 
-            SomePersonRepresentaion personFromDb = await this.repository.Get(1);
+            IntKeyedPerson personFromDb = await repository.Get(1);
 
             personFromDb.Should().NotBeNull();
             personFromDb.Should().BeEquivalentTo(person);
@@ -42,21 +43,21 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests
         [InlineData(100)]
         [InlineData(1000)]
         [InlineData(10000)]
-        public async Task CreateMany(int repeates)
+        public async Task CreateMany(int repeats)
         {
-            for (int i = 0; i < repeates; i++)
+            for (int i = 0; i < repeats; i++)
             {
-                await this.repository.Insert(SomePersonRepresentaion.CreateOne());
+                await repository.Insert(IntKeyedPerson.CreateOne());
             }
 
-            var peopleFromDb = (await this.repository.GetAll()).ToList();
+            var peopleFromDb = (await repository.GetAll()).ToList();
 
             peopleFromDb.Should().NotBeEmpty();
         }
 
         protected override async Task Cleanup()
         {
-            await this.collectionPurger.Purge(this.collectionName);
+            await collectionPurger.Purge(collectionName);
         }
     }
 }

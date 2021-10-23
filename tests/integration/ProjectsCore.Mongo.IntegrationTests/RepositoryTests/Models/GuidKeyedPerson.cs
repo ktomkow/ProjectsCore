@@ -3,9 +3,9 @@ using ProjectsCore.Models;
 using System;
 using System.Text;
 
-namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests
+namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.Models
 {
-    public class SomePersonRepresentaion : Entity<int>
+    public class GuidKeyedPerson : Entity<Guid>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -15,11 +15,11 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests
         public int LoyaltyPoints { get; set; }
         public decimal Credits { get; set; }
 
-        public static SomePersonRepresentaion CreateOne()
+        public static GuidKeyedPerson CreateOne()
         {
-            var faker = new Faker<SomePersonRepresentaion>()
+            var faker = new Faker<GuidKeyedPerson>()
                 .StrictMode(true)
-                .RuleFor(x => x.Id, y => 0)
+                .RuleFor(x => x.Id, y => Guid.Empty)
                 .RuleFor(x => x.FirstName, y => y.Person.FirstName)
                 .RuleFor(x => x.LastName, y => y.Person.LastName)
                 .RuleFor(x => x.MemberIdentifier, y => Guid.NewGuid())
@@ -34,13 +34,13 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests
         public override string ToString()
         {
             var builder = new StringBuilder();
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.FirstName)} : {FirstName}");
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.LastName)} : {LastName}");
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.MemberIdentifier)} : {MemberIdentifier}");
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.Email)} : {Email}");
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.LoyaltyPoints)} : {LoyaltyPoints}");
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.Credits)} : {Credits}");
-            builder.AppendLine($"{nameof(SomePersonRepresentaion.Phone)} : {Phone}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.FirstName)} : {FirstName}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.LastName)} : {LastName}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.MemberIdentifier)} : {MemberIdentifier}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.Email)} : {Email}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.LoyaltyPoints)} : {LoyaltyPoints}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.Credits)} : {Credits}");
+            builder.AppendLine($"{nameof(IntKeyedPerson.Phone)} : {Phone}");
 
             return builder.ToString();
         }
