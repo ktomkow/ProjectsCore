@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using ProjectsCore.IdGeneration;
 using ProjectsCore.Models;
 using ProjectsCore.Mongo.Extensions;
@@ -35,14 +36,14 @@ namespace ProjectsCore.Mongo.Implementations
 
         public async Task<IQueryable<TEntity>> GetAll()
         {
-            var result = GetCollection().AsQueryable();
+            var result = this.GetCollection().AsQueryable();
 
             return await Task.FromResult(result.AsQueryable());
         }
 
         public async Task<TEntity> Insert(TEntity entity)
         {
-            var collection = GetCollection();
+            var collection = this.GetCollection();
 
             TKey id = await idGenerator.Generate(typeof(TEntity));
             entity.SetId(id);
@@ -57,9 +58,15 @@ namespace ProjectsCore.Mongo.Implementations
             throw new NotImplementedException();
         }
 
-        public Task<TEntity> Update(TEntity entity)
+        public async Task<TEntity> Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var collection = this.GetCollection();
+            var builder = Builders<TEntity>.Filter;
+
+            var filter = builder.Eq("Id", entity.Id);
+            await collection.ReplaceOneAsync(filter, entity);
+
+            return entity;
         }
 
         public IMongoCollection<TEntity> GetCollection()
