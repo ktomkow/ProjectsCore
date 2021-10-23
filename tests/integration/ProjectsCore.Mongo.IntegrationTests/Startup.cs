@@ -4,6 +4,7 @@ using ProjectsCore.Mongo.Settings;
 using ProjectsCore.Mongo.Testing;
 using System.IO;
 using System.Text.Json;
+using Xunit.Abstractions;
 
 namespace ProjectsCore.Mongo.IntegrationTests
 {

@@ -23,11 +23,18 @@ namespace ProjectsCore.Mongo.IntegrationTests
         public virtual async Task InitializeAsync()
         {
             await Cleanup();
+            await this.CleanIdentifiers();
         }
 
         public virtual async Task DisposeAsync()
         {
             await Cleanup();
+            await this.CleanIdentifiers();
+        }
+
+        private async Task CleanIdentifiers()
+        {
+            await this.collectionPurger.Purge("_identifiers");
         }
 
         protected abstract Task Cleanup();

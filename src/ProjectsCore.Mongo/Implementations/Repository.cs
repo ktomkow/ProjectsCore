@@ -28,9 +28,9 @@ namespace ProjectsCore.Mongo.Implementations
             db = dbFactory.Create();
         }
 
-        public Task<TEntity> Get(TKey key)
+        public async Task<TEntity> Get(TKey key)
         {
-            throw new NotImplementedException();
+            return (await this.GetAll()).FirstOrDefault(x => x.Id.Equals(key));
         }
 
         public async Task<IQueryable<TEntity>> GetAll()
