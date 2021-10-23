@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ProjectsCore" Version="1.0.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectsCore.Mongo\ProjectsCore.Mongo.csproj" />
+    <ProjectReference Include="..\ProjectsCore\ProjectsCore.csproj" />
+  </ItemGroup>
+
+</Project>
