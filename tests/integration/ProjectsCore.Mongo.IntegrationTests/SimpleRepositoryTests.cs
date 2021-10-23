@@ -22,11 +22,11 @@ namespace ProjectsCore.Mongo.IntegrationTests
         {
             ICollectionNameResolver nameResolver = this.serviceProvider.GetService<ICollectionNameResolver>();
 
-            repositoryIntKey = this.serviceProvider.GetService<IRepository<int, SimpleEntity>>();
-            repositoryGuidKey = this.serviceProvider.GetService<IRepository<Guid, SimpleEntityGuidId>>();
+            this.repositoryIntKey = this.serviceProvider.GetService<IRepository<int, SimpleEntity>>();
+            this.repositoryGuidKey = this.serviceProvider.GetService<IRepository<Guid, SimpleEntityGuidId>>();
 
-            collectionNameInt = nameResolver.Resolve(typeof(SimpleEntity));
-            collectionNameGuid = nameResolver.Resolve(typeof(SimpleEntityGuidId));
+            this.collectionNameInt = nameResolver.Resolve(typeof(SimpleEntity));
+            this.collectionNameGuid = nameResolver.Resolve(typeof(SimpleEntityGuidId));
         }
 
         [Fact]
@@ -72,8 +72,8 @@ namespace ProjectsCore.Mongo.IntegrationTests
 
         protected override async Task Cleanup()
         {
-            await collectionPurger.Purge(collectionNameInt);
-            await collectionPurger.Purge(collectionNameGuid);
+            await this.collectionPurger.Purge(collectionNameInt);
+            await this.collectionPurger.Purge(collectionNameGuid);
         }
 
         private class SimpleEntity : Entity<int>
