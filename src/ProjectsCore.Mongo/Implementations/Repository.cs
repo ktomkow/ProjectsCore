@@ -26,7 +26,7 @@ namespace ProjectsCore.Mongo.Implementations
         {
             this.resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             this.idGenerator = idGenerator;
-            db = dbFactory.Create();
+            this.db = dbFactory.Create();
         }
 
         public async Task<TEntity> Get(TKey key)
