@@ -1,12 +1,14 @@
 ﻿using MongoPack.IdGeneration;
 using System;
 using ProjectsCore.Persistence;
-using MongoPack;
 using ProjectsCore.Mongo.Implementations;
 using ProjectsCore.Mongo.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectsCore.IdGeneration;
 using ProjectsCore.Mongo.Implementations.IdGeneration;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson;
 
 namespace ProjectsCore.Mongo.ServiceProvider
 {
@@ -21,6 +23,8 @@ namespace ProjectsCore.Mongo.ServiceProvider
 
             services.AddTransient<IEntityIdGenerator<int>, EntityIntIdGenerator>();
             services.AddTransient<IEntityIdGenerator<Guid>, EntityGuidIdGenerator>();
+
+            BsonSerializer.RegisterSerializer(typeof(DateTime), new DateTimeSerializer(DateTimeKind.Utc, BsonType.DateTime));
         }
     }
 }

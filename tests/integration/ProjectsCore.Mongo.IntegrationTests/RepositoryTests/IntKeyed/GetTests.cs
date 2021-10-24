@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ProjectsCore.Mongo.Interfaces;
 using ProjectsCore.Persistence;
+using ProjectsCore.Extensions;
 using System;
 using System.Threading.Tasks;
 using Xunit;
@@ -10,19 +10,15 @@ using ProjectsCore.Mongo.IntegrationTests.RepositoryTests.Models;
 
 namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
 {
-    public class SimpleTests : TestsFixture
+    public class GetTests : TestsFixture
     {
-        private readonly string collectionName;
-
         private readonly IRepository<int, IntKeyedPerson> repository;
+        private readonly IRepository<int, IntKeyedWithDatetime> withDatetimeRepository;
 
-        public SimpleTests(IServiceProvider serviceProvider) : base(serviceProvider)
+        public GetTests(IServiceProvider serviceProvider) : base(serviceProvider)
         {
-            ICollectionNameResolver nameResolver = this.serviceProvider.GetService<ICollectionNameResolver>();
-
             repository = this.serviceProvider.GetService<IRepository<int, IntKeyedPerson>>();
-
-            collectionName = nameResolver.Resolve(typeof(IntKeyedPerson));
+            withDatetimeRepository = this.serviceProvider.GetService<IRepository<int, IntKeyedWithDatetime>>();
         }
 
         [Fact]
@@ -42,7 +38,6 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
         [InlineData(10)]
         [InlineData(100)]
         [InlineData(1000)]
-        [InlineData(10000)]
         public async Task CreateMany(int repeats)
         {
             for (int i = 0; i < repeats; i++)
@@ -55,9 +50,26 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
             peopleFromDb.Should().NotBeEmpty();
         }
 
+        [Fact]
+        public async Task InsertAndGet_IfDatetime_ShouldBeCloseToEachOther()
+        {
+            IntKeyedWithDatetime entity = new IntKeyedWithDatetime()
+            {
+                SomeDate = new DateTime(2020, 1, 23, 10, 10, 59, DateTimeKind.Utc)
+            };
+
+            await this.withDatetimeRepository.Insert(entity);
+
+            var entityFromDb = await this.withDatetimeRepository.Get(1);
+
+            bool areEqual = entity.SomeDate.IsEqualTo(entityFromDb.SomeDate);
+            areEqual.Should().BeTrue();
+        }
+
         protected override async Task Cleanup()
         {
-            await collectionPurger.Purge(collectionName);
+            await collectionPurger.Purge(nameof(IntKeyedPerson));
+            await collectionPurger.Purge(nameof(IntKeyedWithDatetime));
         }
     }
 }
