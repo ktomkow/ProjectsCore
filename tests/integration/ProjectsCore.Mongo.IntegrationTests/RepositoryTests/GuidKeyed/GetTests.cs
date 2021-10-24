@@ -12,8 +12,6 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.GuidKeyed
 {
     public class GetTests : TestsFixture
     {
-        private readonly string collectionName;
-
         private readonly IRepository<Guid, GuidKeyedPerson> repository;
 
         public GetTests(IServiceProvider serviceProvider) : base(serviceProvider)
@@ -21,8 +19,6 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.GuidKeyed
             ICollectionNameResolver nameResolver = this.serviceProvider.GetService<ICollectionNameResolver>();
 
             this.repository = this.serviceProvider.GetService<IRepository<Guid, GuidKeyedPerson>>();
-
-            this.collectionName = nameResolver.Resolve(typeof(IntKeyedPerson));
         }
 
         [Fact]
@@ -57,7 +53,7 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.GuidKeyed
 
         protected override async Task Cleanup()
         {
-            await this.collectionPurger.Purge(this.collectionName);
+            await this.collectionPurger.Purge(nameof(GuidKeyedPerson));
         }
     }
 }

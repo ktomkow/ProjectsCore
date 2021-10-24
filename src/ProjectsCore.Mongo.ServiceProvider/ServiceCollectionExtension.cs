@@ -24,7 +24,7 @@ namespace ProjectsCore.Mongo.ServiceProvider
             services.AddTransient<IEntityIdGenerator<int>, EntityIntIdGenerator>();
             services.AddTransient<IEntityIdGenerator<Guid>, EntityGuidIdGenerator>();
 
-            BsonSerializer.RegisterSerializer(typeof(DateTime), new DateTimeSerializer(DateTimeKind.Utc, BsonType.DateTime));
+            BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
         }
     }
 }
