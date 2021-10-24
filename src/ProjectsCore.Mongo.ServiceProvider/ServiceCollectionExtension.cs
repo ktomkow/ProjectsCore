@@ -9,6 +9,7 @@ using ProjectsCore.Mongo.Implementations.IdGeneration;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Conventions;
 
 namespace ProjectsCore.Mongo.ServiceProvider
 {
@@ -24,7 +25,13 @@ namespace ProjectsCore.Mongo.ServiceProvider
             services.AddTransient<IEntityIdGenerator<int>, EntityIntIdGenerator>();
             services.AddTransient<IEntityIdGenerator<Guid>, EntityGuidIdGenerator>();
 
+            var conventions = new ConventionPack
+            {
+                new EnumRepresentationConvention(BsonType.String)
+            };
+
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+            ConventionRegistry.Register("EnumStringConvention", conventions, t => true);
         }
     }
 }

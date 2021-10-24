@@ -7,6 +7,7 @@ using Xunit;
 using FluentAssertions;
 using System.Linq;
 using ProjectsCore.Mongo.IntegrationTests.RepositoryTests.Models;
+using MongoDB.Driver;
 
 namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
 {
@@ -14,11 +15,13 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
     {
         private readonly IRepository<int, IntKeyedPerson> repository;
         private readonly IRepository<int, IntKeyedWithDatetime> withDatetimeRepository;
+        private readonly IRepository<int, IntKeyedWithEnum> withEnumRepository;
 
         public GetTests(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             repository = this.serviceProvider.GetService<IRepository<int, IntKeyedPerson>>();
             withDatetimeRepository = this.serviceProvider.GetService<IRepository<int, IntKeyedWithDatetime>>();
+            withEnumRepository = this.serviceProvider.GetService<IRepository<int, IntKeyedWithEnum>>();
         }
 
         [Fact]
@@ -60,16 +63,32 @@ namespace ProjectsCore.Mongo.IntegrationTests.RepositoryTests.IntKeyed
 
             await this.withDatetimeRepository.Insert(entity);
 
-            var entityFromDb = await this.withDatetimeRepository.Get(1);
+            IntKeyedWithDatetime entityFromDb = await this.withDatetimeRepository.Get(1);
 
             bool areEqual = entity.SomeDate.IsEqualTo(entityFromDb.SomeDate);
             areEqual.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task InsertAndGet_IfEnum_ShouldBeSameAsSaved()
+        {
+            IntKeyedWithEnum entity = new IntKeyedWithEnum()
+            {
+                Coolnes = Coolnes.Awesome
+            };
+
+            await this.withEnumRepository.Insert(entity);
+
+            IntKeyedWithEnum entityFromDb = await this.withEnumRepository.Get(1);
+
+            entityFromDb.Coolnes.Should().Be(entity.Coolnes);
         }
 
         protected override async Task Cleanup()
         {
             await collectionPurger.Purge(nameof(IntKeyedPerson));
             await collectionPurger.Purge(nameof(IntKeyedWithDatetime));
+            await collectionPurger.Purge(nameof(IntKeyedWithEnum));
         }
     }
 }
