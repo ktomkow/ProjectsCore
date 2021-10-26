@@ -1,5 +1,6 @@
 using FluentAssertions;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace ProjectsCore.DynamicLambda.UnitTests
@@ -31,6 +32,7 @@ namespace ProjectsCore.DynamicLambda.UnitTests
         [InlineData(10000)]
         public void Create_IntInt_ManyTimes_ShouldBeFast(int loopsCount)
         {
+            var results = new List<int>();
             for (int i = 0; i < loopsCount; i++)
             {
                 // x => x * 2
@@ -40,7 +42,10 @@ namespace ProjectsCore.DynamicLambda.UnitTests
 
                 int input = 3;
                 int output = doubler(input);
+                results.Add(output);
             }
+
+            results.TrueForAll(x => x == 6);
         }
     }
 }
