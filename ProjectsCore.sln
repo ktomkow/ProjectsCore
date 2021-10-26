@@ -19,11 +19,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unit", "unit", "{E63F87A3-4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsCore.UnitTests", "tests\unit\ProjectsCore.UnitTests\ProjectsCore.UnitTests.csproj", "{114D6FAE-DB2A-4789-ABC7-0A516AF847E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsCore.Mongo.UnitTests", "tests\unit\ProjectsCore.Mongo.UnitTests\ProjectsCore.Mongo.UnitTests.csproj", "{C49F4A81-D261-4D69-9373-6321EAB0382D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsCore.Mongo.UnitTests", "tests\unit\ProjectsCore.Mongo.UnitTests\ProjectsCore.Mongo.UnitTests.csproj", "{C49F4A81-D261-4D69-9373-6321EAB0382D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{6EAD59C6-A6E2-48B2-AF25-DB3F4CBD76EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsCore.Mongo.IntegrationTests", "tests\integration\ProjectsCore.Mongo.IntegrationTests\ProjectsCore.Mongo.IntegrationTests.csproj", "{20B478BB-0471-46E8-BB55-2557AD7682C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectsCore.Mongo.IntegrationTests", "tests\integration\ProjectsCore.Mongo.IntegrationTests\ProjectsCore.Mongo.IntegrationTests.csproj", "{20B478BB-0471-46E8-BB55-2557AD7682C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsCore.DynamicLambda", "src\ProjectsCore.DynamicLambda\ProjectsCore.DynamicLambda.csproj", "{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsCore.DynamicLambda.UnitTests", "tests\unit\ProjectsCore.DynamicLambda.UnitTests\ProjectsCore.DynamicLambda.UnitTests.csproj", "{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +123,30 @@ Global
 		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x64.Build.0 = Release|Any CPU
 		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x86.ActiveCfg = Release|Any CPU
 		{20B478BB-0471-46E8-BB55-2557AD7682C3}.Release|x86.Build.0 = Release|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Debug|x64.Build.0 = Debug|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Debug|x86.Build.0 = Debug|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Release|x64.ActiveCfg = Release|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Release|x64.Build.0 = Release|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Release|x86.ActiveCfg = Release|Any CPU
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7}.Release|x86.Build.0 = Release|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Debug|x64.Build.0 = Debug|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Debug|x86.Build.0 = Debug|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Release|x64.ActiveCfg = Release|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Release|x64.Build.0 = Release|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Release|x86.ActiveCfg = Release|Any CPU
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -133,6 +161,8 @@ Global
 		{C49F4A81-D261-4D69-9373-6321EAB0382D} = {E63F87A3-4116-47B3-936E-881DA33CC48C}
 		{6EAD59C6-A6E2-48B2-AF25-DB3F4CBD76EA} = {6CE393BE-6499-454F-B200-35FE6593BC70}
 		{20B478BB-0471-46E8-BB55-2557AD7682C3} = {6EAD59C6-A6E2-48B2-AF25-DB3F4CBD76EA}
+		{4FEEFC8D-E0E0-4C40-B456-4ED16E5BACD7} = {74008F08-7736-4092-83F2-E6C6B623A630}
+		{6CA44147-6A8A-4C11-A4C3-EB99B90EA888} = {E63F87A3-4116-47B3-936E-881DA33CC48C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B4FB8B06-999E-41B9-A740-C58E5B38CCA9}
