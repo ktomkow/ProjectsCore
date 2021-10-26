@@ -12,16 +12,18 @@ namespace ProjectsCore.DynamicLambda
 
         public static Func<TInput, TOutput> CreateFunc<TInput, TOutput>(this string lambda)
         {
-            if(functions.TryGetValue(lambda, out var dupa))
+            string key = $"{lambda}-{typeof(TInput).FullName}-{typeof(TOutput).FullName}";
+
+            if(functions.TryGetValue(key, out Delegate compiledDelegate))
             {
-                return dupa as Func<TInput, TOutput>;
+                return compiledDelegate as Func<TInput, TOutput>;
             }
 
-            var del = Construct<TInput, TOutput>(lambda);
+            compiledDelegate = Construct<TInput, TOutput>(lambda);
 
-            functions.Add(lambda, del);
+            functions.Add(key, compiledDelegate);
 
-            return del as Func<TInput, TOutput>; ;
+            return compiledDelegate as Func<TInput, TOutput>; ;
         }
 
         public static Delegate Construct<TInput, TOutput>(string lambda)

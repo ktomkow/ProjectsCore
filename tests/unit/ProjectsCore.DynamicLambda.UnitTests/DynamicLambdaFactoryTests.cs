@@ -47,5 +47,17 @@ namespace ProjectsCore.DynamicLambda.UnitTests
 
             results.TrueForAll(x => x == 6);
         }
+
+        [Fact]
+        public void Create_IfSameLambdaForDifferentTypes_BothShouldNotBeNull()
+        {
+            string lambda = "x + 5";
+
+            Func<int, int> a = DynamicLambdaFactory.CreateFunc<int, int>(lambda);
+            Func<double, double> b = DynamicLambdaFactory.CreateFunc<double, double>(lambda);
+
+            a.Should().NotBeNull();
+            b.Should().NotBeNull();
+        }
     }
 }
