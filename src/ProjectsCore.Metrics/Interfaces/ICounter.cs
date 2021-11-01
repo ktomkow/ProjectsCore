@@ -5,7 +5,8 @@ namespace ProjectsCore.Metrics.Interfaces
     public interface ICounter
     {
         Task Tick();
+        Task Tick(string series);
         Task Tick(uint count);
-        Task Tick(double count);
+        Task Tick(uint count, string series);
     }
 }

@@ -11,4 +11,8 @@
     <PackageReference Include="prometheus-net.AspNetCore.HealthChecks" Version="5.0.1" />
     <PackageReference Include="prometheus-net.SystemMetrics" Version="2.0.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectsCore.Reflections\ProjectsCore.Reflections.csproj" />
+  </ItemGroup>
 </Project>
