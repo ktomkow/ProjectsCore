@@ -26,7 +26,7 @@ namespace ProjectsCore.DynamicLambda
             return compiledDelegate as Func<TInput, TOutput>; ;
         }
 
-        public static Delegate Construct<TInput, TOutput>(string lambda)
+        private static Delegate Construct<TInput, TOutput>(string lambda)
         {
             ParameterExpression x = Expression.Parameter(typeof(TInput), "x");
 
