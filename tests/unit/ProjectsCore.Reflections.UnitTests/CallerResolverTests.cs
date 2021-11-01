@@ -30,17 +30,17 @@ namespace ProjectsCore.Reflections.UnitTests
         {
             SomeKindOfClass someObject = new SomeKindOfClass();
 
-            string result = someObject.ExecResolveName();
+            string result = SomeKindOfClass.ResolvedName;
 
             result.Should().Be(nameof(SomeKindOfClass));
         }
 
-        [Fact]
+        [Fact]  
         public void StaticResolvedFullName_WhenCalledInsideMethodOfSomeKindOfClass_ThenNamespaceAndClass()
         {
             SomeKindOfClass someObject = new SomeKindOfClass();
 
-            string result = someObject.ExecResolveFullName();
+            string result = SomeKindOfClass.ResolvedFullName;
 
             result.Should().Be($"ProjectsCore.Reflections.UnitTests.{nameof(SomeKindOfClass)}");
         }
